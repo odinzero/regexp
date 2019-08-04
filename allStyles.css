@@ -1,0 +1,32 @@
+
+
+.description
+{
+    color: #ea6bc5;
+    width: 550px;
+    margin-left: 5px;
+    font-family: "Arial";
+}
+
+.syntax
+{
+    background: #ccccff;
+    border: 1px gray solid;
+    width: 250px;
+    height: 100px;
+    padding: 10px 10px;
+}
+
+
+ #mod  td  a:hover
+{
+    background: yellow;
+    font-size: 26px;
+}
+
+table  tr:hover 
+{
+    background: yellowgreen;
+}
+
+

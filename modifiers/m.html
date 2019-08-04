@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<!-- -->
+<html>
+    <head>
+        <title>-== m ==-</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link type="text/css" rel="stylesheet" href="../allStyles.css" />
+    </head>
+    <body>
+        <div class="description">
+            <h1>RegExp <span style="color:#00cc33">[m]</span> Expression</h1>
+            <h3>Definition and Usage</h3> 
+            <span>The m modifier is used to perform a multiline match.</span><br><br>
+            <span></span>The m modifier treat beginning (^) and end ($) characters to match the beginning or
+                         end of each line of a string (delimited by \n or \r), rather than just the beginning 
+                         or end of the string.<br><br>
+            <span><b>Note:</b>The m modifier is case-sensitive and will stop the search after the first match.
+                              To perform a global, case-insensitive, multiline search, use this modifier together
+                              with "g" and "i".</span><br><br>
+            <span><b>Tip:</b>Use the multiline property to specify whether or not the m modifier is set.</span>
+             <hr>
+             <h3>Browser Support</h3>
+             <div>
+                 <img src="../img/browsers/compatible_chrome.gif" alt="">
+                 <img src="../img/browsers/compatible_firefox.gif" alt="">
+                 <img src="../img/browsers/compatible_ie.gif" alt="">
+                 <img src="../img/browsers/compatible_opera.gif" alt="">
+                 <img src="../img/browsers/compatible_safari.gif" alt="">
+                 <br>
+                 <span>The m modifier is supported in all major browsers.</span>
+             </div>
+             <hr>
+             <h3>Syntax</h3>
+             <div class="syntax" >
+                 <span>new RegExp("<i>regexp</i>","m")</span>
+                 <p>or simply:</p>
+                 <span>/<i>regexp</i>/m</span>>
+             </div>
+        </div>
+    </body>
+</html>

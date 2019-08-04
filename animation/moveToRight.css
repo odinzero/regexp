@@ -1,0 +1,19 @@
+/* ---------------------- run-animation1 -------------------------------------*/ 
+
+ .run-animation1 { 
+	     position: absolute;
+             left: 500px;
+             
+	     -webkit-animation: fancy-animation1 3s ease;
+	    }
+
+ @-webkit-keyframes fancy-animation1 {
+        
+        from {
+            left: 500px; 
+        }
+        to {
+            left: 1200px;
+        }
+      
+      } 

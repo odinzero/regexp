@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<!-- -->
+<html>
+    <head>
+        <title>-== [^abc] ==-</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link type="text/css" rel="stylesheet" href="../allStyles.css" />
+    </head>
+    <body>
+        <div class="description">
+            <h1>RegExp <span style="color:#00cc33">[^abc]</span> Expression</h1>
+            <h3>Definition and Usage</h3> 
+            <span>The [abc] expression is used to find any character NOT between the brackets.</span><br><br>
+            <span>The characters inside the brackets can be any characters or span of characters:</span>
+            <ul>
+                <li>[abcde..] - Any character between the brackets</li>
+                <li>[A-Z] - Any character from uppercase A to uppercase Z</li>
+                <li>[a-z] - Any character from lowercase a to lowercase z</li>
+                <li>[A-z ]- Any character from uppercase A to lowercase z</li>
+            </ul>
+            <span><b>Tip:</b>Use the <a href="[abc].html" style=" text-decoration-line: underline;">[abc]</a> expression to find any character between the brackets.</span>
+            <hr>
+            <h3>Browser Support</h3>
+            <div>
+                <img src="../img/browsers/compatible_chrome.gif" alt="">
+                <img src="../img/browsers/compatible_firefox.gif" alt="">
+                <img src="../img/browsers/compatible_ie.gif" alt="">
+                <img src="../img/browsers/compatible_opera.gif" alt="">
+                <img src="../img/browsers/compatible_safari.gif" alt="">
+                <br>
+                <span>The [^abc] expression is supported in all major browsers.</span>
+            </div>
+            <hr>
+            <div style="display: table-row;">
+            <h3 style="display:table-cell;text-align: center;">Syntax</h3>
+            <h3 style="display:table-cell;padding-bottom: 25px;"></h3>
+            <h3 style="display: table-cell;text-align: center;">Syntax with modifiers</h3>
+            </div>
+           
+            <div style="display: table-row;  ">
+                <div class="syntax" style="display: table-cell; " >
+                    <span>new RegExp("[<i>^xyz</i>]")</span>
+                    <p>or simply:</p>
+                    <span>/[<i>^xyz</i>]/</span>
+                </div>
+                <div style="width:15px;"></div>
+                <div class="syntax" style="display: table-cell; ">
+                    <span>new RegExp("[<i>^xyz</i>]", "g")</span>
+                    <p>or simply:</p>
+                    <span>/\[<i>^xyz</i>]/g</span>
+                </div>
+            </div>
+          
+        </div>
+    </body>
+</html>

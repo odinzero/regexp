@@ -1,0 +1,20 @@
+ @keyframes anim
+            {
+                from { left: 500px;}
+                to   { left: 1250px; }
+            }
+            @-webkit-keyframes anim{
+                from {left:500px;}
+                to {left:1250px;}
+            }
+            @-moz-keyframes anim{
+                from {left:500px;}
+                to {left:1250px;}
+            }
+            #explaination
+            {
+                -webkit-animation: anim 4s ;
+                -webkit-animation-direction: normal;
+                
+            }
+

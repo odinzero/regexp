@@ -1,0 +1,22 @@
+
+
+.run-animation1
+{ 
+    position: absolute;
+    left: 500px;
+    top: 0px;
+    width: 700px;
+    height: 600px;
+}
+
+.opacity
+{ 
+    position: absolute;
+    left: 500px;
+    top: 0px;
+    width: 700px;
+    height: 900px;
+    display: none;
+}
+
+

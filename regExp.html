@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+<!--   -->
+<html>
+    <head>
+        <title>-== regExp ==-</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+        <script type="text/javascript" src="libs/jquery-1.11.1.js"></script>
+        <link rel="stylesheet" href="animation/moveToLeft.css"/>
+        <link rel="stylesheet" href="animation/moveToRight.css"/>
+        <link rel="stylesheet" href="animation/dissapear.css"/>
+        <link rel="stylesheet" href="animation/appear.css"/>
+        <link rel="stylesheet" href="animation/init.css"/>
+        <link rel="stylesheet" href="allStyles.css"/>
+        <script>
+            document.styleSheets[0].disabled = true;
+            document.styleSheets[1].disabled = true;
+
+            document.styleSheets[2].disabled = true;
+            document.styleSheets[3].disabled = true;
+
+            var identity = 0;
+        </script>
+    </head>
+    <!--  onload="initSettingsOnload()" -->
+    <body id="bod" > 
+        <h3 id="h3">RegExp</h3>
+        <div id="syntax">
+            <input type="checkbox" id="fullForm" onclick="select_fform();resetFForm()" >
+            <span class="exm"> полная форма записи</span><br>
+            <span>var expr = new RegExp(<i>pattern</i> [, 
+                <select id="select_mod" onchange="selectModifier()">
+                    <option>modifiers</option>
+                    <option>    i     </option>
+                    <option>    g     </option>
+                    <option>    m     </option>
+                    <option>    ig     </option>
+                    <option>    im     </option>
+                    <option>    gm     </option>
+                    <option>    gim     </option>
+                </select>  ]);</span><br><br> 
+
+
+            <input type="checkbox" id="shortForm" onclick="select_sform();resetSForm()"  > 
+            <span class="exm"> сокращенная форма записи (литеральный формат)</span></br>
+            <span>var expr = <i>/pattern/modifiers</i>;</span>
+
+            <textarea id="search" onkeyup="textAreaValue()"  ></textarea>
+            <div id="otherExamples"></div>
+            <div id="exampleExplanation"></div>
+            <div id="marked_result"></div>
+            <div id="res"></div>
+            <input type="text" id="tf" onkeyup="choiceFunction()" onfocus="choiceFunction()" placeholder="expr" />
+            <input type="text" id="tf_replace" onkeyup="choiceFunction()" onfocus="choiceFunction()" placeholder="Replace Value" />
+            <div id="methods">
+                <input type="checkbox" class="check _test" onclick="select_test()" ><label >test()</label>
+                <input type="checkbox" class="check _search" onclick="select_search()" ><label >search()</label>
+                <input type="checkbox" class="check _exec" onclick="select_exec()"><label >exec()</label>
+                <input type="checkbox" class="check _replace" onclick="select_replace()"><label >replace()</label>
+                <input type="checkbox" class="check _match" onclick="select_match()"  ><label >match()</label>
+            </div>
+        </div>
+
+
+        <iframe id="content" frameborder="no"  src="" class="opacity" >
+        
+        </iframe>
+        
+        <div id="explaination" class="run-animation1" >
+                 <div id="arrows">
+                    <img id="arrowRight" src="img/arrows/arrow_right.png" 
+                         onclick=" animation('explaination', 'content')"
+                         />
+                    <img id="arrowLeft" src="img/arrows/arrow_left.jpg"  
+                         onclick="  animation('explaination', 'content')"  
+                         />
+                    <img id="arrowDown" src="img/arrows/arrow_down.png" onclick="scrolltoDOWN()"  />
+                    <img id="arrowUp" src="img/arrows/arrow_up.png"  onclick="scrolltoUP()"   />
+                </div>
+                <div id="arr1"><h3>Мodifiers</h3></div>
+            
+            <span>Modifiers are used to perform case-insensitive and global searches:</span><br>
+            <table id="mod">
+                <tr>
+                    <th>Modifier</th><th>Description</th> 
+                </tr>
+                <tr>
+                    <td><a class="cc"  onclick="showContentInIFrame('content', '../RegExp/modifiers/i.html');
+                            animation('explaination', 'content');                           
+                            setInitValues_i();" 
+                            >i</a> </td><td>Perform case-insensitive matching</td> 
+                </tr>
+                <tr>
+                    <td><a class="cc" onclick="showContentInIFrame('content', '../RegExp/modifiers/g.html');
+                           animation('explaination', 'content');
+                           example1_g()" 
+                           >g</a> </td><td>Perform a global match (find all matches rather than stopping after the first match)</td>
+                </tr>
+                <tr>
+                    <td><a class="cc" onclick="showContentInIFrame('content', '../RegExp/modifiers/m.html');
+                           animation('explaination', 'content')
+                           example1_m()" 
+                           >m</a></td><td>Perform multiline matching</td> 
+                </tr>
+            </table>
+            <h3>Brackets</h3>
+            <span>Brackets are used to find a range of characters:</span><br>
+            <table id="mod">
+                <tr>
+                    <th>Expression</th><th>Description</th> 
+                </tr>
+                <tr>
+                    <td><a class="cc" onclick="showContentInIFrame('content', '../RegExp/brackets/[abc].html');
+                            animation('explaination', 'content');
+                            example1_brackets_abc()">[abc]</a></td>
+                    <td>Find any character between the brackets</td> 
+                </tr>
+                <tr>
+                    <td><a class="cc" onclick="showContentInIFrame('content', '../RegExp/brackets/[^abc].html');
+                            animation('explaination', 'content');
+                            example1_brackets_not_abc()">[^abc]</a></td>
+                    <td>Find any character NOT between the brackets</td>
+                </tr>
+                <tr>
+                    <td><a class="cc" onclick="showContentInIFrame('content', '../RegExp/brackets/[0-9].html');
+                            animation('explaination', 'content');
+                            example1_brackets_09()">[0-9]</a></td>
+                    <td>Find any digit between the brackets</td> 
+                </tr>
+                <tr>
+                    <td><a class="cc" onclick="showContentInIFrame('content', '../RegExp/brackets/[^0-9].html');
+                            animation('explaination', 'content');
+                            example1_brackets_not09()">[^0-9]</a></td>
+                    <td>Find any digit NOT between the brackets</td> 
+                </tr> 
+                <tr>
+                    <td><a class="cc" onclick="showContentInIFrame('content', '../RegExp/brackets/(x_y).html');
+                            animation('explaination', 'content');
+                            example1_brackets_xy()">(x|y)</a></td>
+                    <td>Find any of the alternatives specified</td> 
+                </tr>
+            </table>
+            <h3>Metacharacters</h3>
+            <span>Metacharacters are characters with a special meaning</span><br><br>
+            <table id="mod">
+                <tr>
+                    <th>Metacharacter</th><th>Description</th> 
+                </tr>
+                <tr>
+                    <td><a class="cc" onclick="showContentInIFrame('content', '../RegExp/metacharacters/..html');
+                            animation('explaination', 'content');
+                            example1_brackets_point()">.</a></td>
+                    <td>Find a single character, except newline or line terminator</td> 
+                </tr>
+                <tr>
+                    <td><a class="cc" onclick="showContentInIFrame('content', '../RegExp/metacharacters/w.html');
+                            animation('explaination', 'content');
+                            example1_brackets_word()">\w</a></td>
+                    <td>Find a word character</td>
+                </tr>
+                <tr>
+                    <td><a class="cc" onclick="showContentInIFrame('content', '../RegExp/metacharacters/W_.html');
+                            animation('explaination', 'content');
+                            example1_brackets_nonword()">\W</a></td>
+                    <td>Find a non-word character</td> 
+                </tr>
+                <tr>
+                    <td><a class="cc" onclick="showContentInIFrame('content', '../RegExp/metacharacters/d.html');
+                            animation('explaination', 'content');
+                            example1_brackets_d()">\d</a></td>
+                    <td>Find a digit</td> 
+                </tr>
+                <tr>
+                    <td><a class="cc" onclick="showContentInIFrame('content', '../RegExp/metacharacters/D_.html');
+                            animation('explaination', 'content');
+                            example1_brackets_D()">\D</a></td>
+                    <td>Find a non-digit character</td> 
+                </tr>
+                <tr>
+                    <td><a class="cc" onclick="showContentInIFrame('content', '../RegExp/metacharacters/s.html');
+                            animation('explaination', 'content');
+                            example1_brackets_s()">\s</a></td>
+                    <td>Find a whitespace character</td> 
+                </tr>
+                <tr>
+                    <td><a class="cc" onclick="showContentInIFrame('content', '../RegExp/metacharacters/S_.html');
+                            animation('explaination', 'content');
+                            example1_brackets_S()">\S</a></td>
+                    <td>Find a non-whitespace character</td> 
+                </tr>
+                <tr>
+                    <td><a class="cc" onclick="showContentInIFrame('content', '../RegExp/metacharacters/b.html');
+                            animation('explaination', 'content');
+                            example1_brackets_b()">\b</a></td>
+                    <td>Find a match at the beginning/end of a word</td> 
+                </tr>
+                <tr>
+                    <td><a class="cc" onclick="showContentInIFrame('content', '../RegExp/metacharacters/B_.html');
+                            animation('explaination', 'content');
+                            example1_brackets_B()">\B</a></td>
+                    <td>Find a match not at the beginning/end of a word</td> 
+                </tr>
+                <tr>
+                    <td><a class="cc" onclick="showContentInIFrame('content', '../RegExp/metacharacters/0.html');
+                            animation('explaination', 'content');
+                            example1_brackets_0()">\0</a></td>
+                    <td>Find a NUL character</td> 
+                </tr>
+                <tr>
+                    <td><a class="cc" onclick="showContentInIFrame('content', '../RegExp/metacharacters/n.html');
+                            animation('explaination', 'content');
+                            example1_brackets_n()">\n</a></td>
+                    <td>Find a new line character</td> 
+                </tr>
+                <tr>
+                    <td><a class="cc" onclick="showContentInIFrame('content', '../RegExp/metacharacters/f.html');
+                            animation('explaination', 'content');
+                            example1_brackets_f()">\f</a></td>
+                    <td>Find a form feed character</td> 
+                </tr>
+                <tr>
+                    <td><a class="cc" onclick="showContentInIFrame('content', '../RegExp/metacharacters/r.html');
+                            animation('explaination', 'content');
+                            example1_brackets_r()">\r</a></td>
+                    <td>Find a carriage return character</td> 
+                </tr>
+                <tr>
+                    <td><a class="cc" onclick="showContentInIFrame('content', '../RegExp/metacharacters/t.html');
+                            animation('explaination', 'content');
+                            example1_brackets_t()">\t</a></td>
+                    <td>Find a tab character</td> 
+                </tr>
+                <tr>
+                    <td><a class="cc" onclick="showContentInIFrame('content', '../RegExp/metacharacters/v.html');
+                            animation('explaination', 'content');
+                            example1_brackets_v()">\v</a></td>
+                    <td>Find a vertical tab character</td> 
+                </tr>
+                <tr>
+                    <td><a class="cc" onclick="showContentInIFrame('content', '../RegExp/metacharacters/xxx.html');
+                            animation('explaination', 'content');
+                            example1_brackets_xxx()">\xxx</a></td>
+                    <td>Find the character specified by an octal number xxx</td> 
+                </tr>
+                <tr>
+                    <td><a class="cc" onclick="showContentInIFrame('content', '../RegExp/metacharacters/xdd.html');
+                            animation('explaination', 'content');
+                            example1_brackets_xdd()">\xdd</a></td>
+                    <td>Find the character specified by a hexadecimal number dd</td> 
+                </tr>
+                <tr>
+                    <td><a class="cc" onclick="showContentInIFrame('content', '../RegExp/metacharacters/uxxxx.html');
+                            animation('explaination', 'content');
+                            example1_brackets_uxxxx()">\uxxxx</a></td>
+                    <td>Find the Unicode character specified by a hexadecimal number xxxx</td> 
+                </tr>
+            </table>
+            <h3>Quantifiers</h3>
+            <table id="mod">
+                <tr>
+                    <th>Quantifiers</th><th>Description</th> 
+                </tr>
+                <tr>
+                    <td><a class="cc" onclick="showContentInIFrame('content', '../RegExp/quantifiers/n_plus.html');
+                            animation('explaination', 'content');
+                            example1_quantifier_plus()">n+</a></td>
+                    <td>Matches any string that contains at least one n</td> 
+                </tr>
+                <tr>
+                    <td><a class="cc" onclick="showContentInIFrame('content', '../RegExp/quantifiers/n_star.html');
+                            animation('explaination', 'content');
+                            example1_quantifier_star()">n*</a></td>
+                    <td>Matches any string that contains zero or more occurrences of n</td>
+                </tr>
+                <tr>
+                    <td><a class="cc" onclick="showContentInIFrame('content', '../RegExp/quantifiers/n_question.html');
+                            animation('explaination', 'content');
+                            example1_quantifier_question()">n?</a></td>
+                    <td>Matches any string that contains zero or one occurrences of n</td> 
+                </tr>
+                <tr>
+                    <td><a class="cc" onclick="showContentInIFrame('content', '../RegExp/quantifiers/n{x}.html');
+                            animation('explaination', 'content');
+                            example1_quantifier_x_inBrackets()">n{X}</a></td>
+                    <td>Matches any string that contains a sequence of X n's</td> 
+                </tr>
+                <tr>
+                    <td><a class="cc" onclick="showContentInIFrame('content', '../RegExp/quantifiers/n{x,y}.html');
+                            animation('explaination', 'content');
+                            example1_quantifier_xy_inBrackets()">n{X,Y}</a></td>
+                    <td>Matches any string that contains a sequence of X to Y n's</td> 
+                </tr>
+                <tr>
+                    <td><a class="cc" onclick="showContentInIFrame('content', '../RegExp/quantifiers/n{x,}.html');
+                            animation('explaination', 'content');
+                            example1_quantifier_x_comma_inBrackets()">n{X,}</a></td>
+                    <td>Matches any string that contains a sequence of X to Y n's</td> 
+                </tr>
+                <tr>
+                    <td><a class="cc" onclick="showContentInIFrame('content', '../RegExp/quantifiers/n$.html');
+                            animation('explaination', 'content');
+                            example1_quantifier_dollar_inBrackets()">n$</a></td>
+                    <td>Matches any string with n at the end of it</td> 
+                </tr>
+                <tr>
+                    <td><a class="cc" onclick="showContentInIFrame('content', '../RegExp/quantifiers/^n.html');
+                            animation('explaination', 'content');
+                            example1_quantifier_notdollar_inBrackets()">^n</a></td>
+                    <td>Matches any string with n at the beginning of it</td> 
+                </tr>
+                <tr>
+                    <td><a class="cc" onclick="showContentInIFrame('content', '../RegExp/quantifiers/question_equal.html');
+                            animation('explaination', 'content');
+                            example1_quantifier_questionequal_inBrackets()">?=n</a></td>
+                    <td>Matches any string that is followed by a specific string n</td> 
+                </tr>
+                <tr>
+                    <td><a class="cc" onclick="showContentInIFrame('content', '../RegExp/quantifiers/question_notequal.html');
+                            animation('explaination', 'content');
+                            example1_quantifier_questionznak_inBrackets()">?!n</a></td>
+                    <td>Matches any string that is not followed by a specific string n</td> 
+                </tr>
+            </table>
+            <h3>RegExp Object Properties</h3>
+            <table id="mod">
+                <tr>
+                    <th>Property</th><th>Description</th> 
+                </tr>
+                <tr>
+                    <td><a class="cc" onclick="showContentInIFrame('content', '../RegExp/RegExp_Object_Properties/constructor.html');
+                            animation('explaination', 'content');
+                            example1_property_constructor()">constructor</a></td>
+                    <td>Returns the function that created the RegExp object's prototype</td> 
+                </tr>
+                <tr>
+                    <td><a class="cc" onclick="showContentInIFrame('content', '../RegExp/RegExp_Object_Properties/global.html');
+                            animation('explaination', 'content');
+                            example1_property_global()">global</a></td>
+                    <td>Checks whether the "g" modifier is set</td>
+                </tr>
+                <tr>
+                    <td><a class="cc" onclick="showContentInIFrame('content', '../RegExp/RegExp_Object_Properties/ignoreCase.html');
+                            animation('explaination', 'content');
+                            example1_property_ignoreCase()">ignoreCase</a></td>
+                    <td>Checks whether the "i" modifier is set</td> 
+                </tr>
+                <tr>
+                    <td><a class="cc" onclick="showContentInIFrame('content', '../RegExp/RegExp_Object_Properties/lastIndex.html');
+                            animation('explaination', 'content');
+                            example1_property_lastIndex()">lastIndex</a></td>
+                    <td>Specifies the index at which to start the next match</td> 
+                </tr> 
+                <tr>
+                    <td><a class="cc" onclick="showContentInIFrame('content', '../RegExp/RegExp_Object_Properties/multiline.html');
+                            animation('explaination', 'content');
+                            example1_property_multiline()">multiline</a></td>
+                    <td>Checks whether the "m" modifier is set</td> 
+                </tr>
+                <tr>
+                    <td><a class="cc" onclick="showContentInIFrame('content', '../RegExp/RegExp_Object_Properties/source.html');
+                            animation('explaination', 'content');
+                            example1_property_source()">source</a></td>
+                    <td>Returns the text of the RegExp pattern</td> 
+                </tr>
+            </table>
+            <h3>RegExp Object Methods</h3>
+            <table id="mod">
+                <tr>
+                    <th>Method</th><th>Description</th> 
+                </tr>
+                <tr>
+                    <td><a class="cc" onclick="showContentInIFrame('content', '../RegExp/methods/compile().html');
+                            animation('explaination', 'content');
+                            example2_regexpMethods_compile()">compile()</a></td>
+                    <td>Deprecated in version 1.5. Compiles a regular expression</td> 
+                </tr>
+                <tr>
+                    <td><a class="cc" onclick="showContentInIFrame('content', '../RegExp/methods/exec().html');
+                            animation('explaination', 'content');
+                            example1_regexpMethods_exec()">exec()</a></td>
+                    <td>Tests for a match in a string. Returns the first match</td>
+                </tr>
+                <tr>
+                    <td><a class="cc" onclick="showContentInIFrame('content', '../RegExp/methods/test().html');
+                            animation('explaination', 'content');
+                            example1_regexpMethods_test()">test()</a></td>
+                    <td>Tests for a match in a string. Returns true or false</td> 
+                </tr>
+                <tr>
+                    <td><a class="cc" onclick="showContentInIFrame('content', '../RegExp/methods/toString().html');
+                            animation('explaination', 'content');
+                            example1_regexpMethods_toString()">toString()</a></td>
+                    <td>Returns the string value of the regular expression</td> 
+                </tr> 
+            </table>
+            <br><br>
+        </div>
+
+        <script>
+            var count = 0;
+            var st = document.getElementsByTagName("a");
+
+            function cntClick()
+            {
+                count++;
+
+                for (i = 0; i < st.length; i++)
+                {
+                    if ((count % 2 != 0) && (st[i].innerHTML == "i")) {
+
+                        st[i].style.background = "green";
+                        st[i].disabled = false;
+                    }
+                    else {
+                        st[i].style.background = "red";
+                        st[i].disabled = true;
+                    }
+                }
+
+            }
+
+
+        </script>
+        <script type="text/javascript" src="animation/js.js"></script>
+        <script type="text/javascript" src="styles.js"></script> 
+        <script type="text/javascript" src="libs/global.js"></script>
+        <script type="text/javascript" src="examples/exm.js"></script>
+        
+        <script type="text/javascript" src="examples/exm_modifiers.js"></script>
+        <script type="text/javascript" src="examples/exm_brackets.js"></script>
+        <script type="text/javascript" src="examples/exm_metacharacters.js"></script>
+        <script type="text/javascript" src="examples/exm_quantifiers.js"></script>
+        <script type="text/javascript" src="examples/exm_regexpProperty.js"></script>
+        <script type="text/javascript" src="examples/exm_regexp_objectMethods.js"></script>
+        <script type="text/javascript" src="examples/exm_explanation.js"></script>
+        
+    </body>
+</html>
